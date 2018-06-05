@@ -2,8 +2,8 @@ import os
 from .. import settings_parser, settings
 
 
-SETTINGS_PATH = './settings.plist'
-s = settings_parser.SettingsParser('iOS')
+SETTINGS_PATH = './config.ini'
+s = settings_parser.SettingsParser('Windows')
 
 
 def scenario():
@@ -30,7 +30,7 @@ def delete_config_file():
         pass
 
 
-class TestIOSParser:
+class TestWINParser:
     def test_value_from_init(self):
         delete_config_file()
 
