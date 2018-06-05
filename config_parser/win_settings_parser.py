@@ -10,8 +10,6 @@ class WINSettingsParser:
         self.config = configparser.ConfigParser()
 
         if not self.config.read(SETTINGS_PATH):
-            self.config['DEFAULT'] = {}
-            self.config['DEFAULT']['example'] = 'example_record'
             with open(SETTINGS_PATH, 'w+') as configfile:
                 self.config.write(configfile)
 

@@ -13,7 +13,7 @@ class IOSSettingsParser:
                 self.settings = load(fp, fmt=FMT_XML)
         except EnvironmentError:  # parent of IOError, OSError *and* WindowsError
             with open(SETTINGS_PATH, 'wb+') as fp:
-                dump(dict(example="Example setting"), fp, fmt=FMT_XML)
+                dump(dict(), fp, fmt=FMT_XML)
                 fp.seek(0)
                 self.settings = load(fp, fmt=FMT_XML)
 
