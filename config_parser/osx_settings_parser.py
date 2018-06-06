@@ -2,17 +2,16 @@ import pathlib
 from plistlib import *
 
 
-SETTINGS_PATH = pathlib.Path('./settings.plist')
-
-
-class IOSSettingsParser:
+class OSXSettingsParser:
     def __init__(self):
         self.settings = {}
+        self.path = pathlib.Path('~/Library/Preferences/org.pythonmac.unspecified.VectorworksCloudServices.plist')
+
         try:
-            with open(SETTINGS_PATH, 'rb') as fp:
+            with open(self.path, 'rb') as fp:
                 self.settings = load(fp, fmt=FMT_XML)
         except EnvironmentError:  # parent of IOError, OSError *and* WindowsError
-            with open(SETTINGS_PATH, 'wb+') as fp:
+            with open(self.path, 'wb+') as fp:
                 dump(dict(), fp, fmt=FMT_XML)
                 fp.seek(0)
                 self.settings = load(fp, fmt=FMT_XML)
@@ -28,5 +27,5 @@ class IOSSettingsParser:
         self.settings[category][variable] = value
 
     def save(self):
-        with open(SETTINGS_PATH, 'wb') as fp:
+        with open(self.path, 'wb') as fp:
             dump(self.settings, fp, fmt=FMT_XML)

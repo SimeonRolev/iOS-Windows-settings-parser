@@ -1,16 +1,23 @@
-import pathlib
-import configparser
+import pathlib, configparser, getpass
 
 
-SETTINGS_PATH = pathlib.Path('./config.ini')
+# Should get this prop from dcc.build_label
+build_label = 'devel'
 
 
 class WINSettingsParser:
     def __init__(self):
         self.config = configparser.ConfigParser()
+        self.path = pathlib.Path('c:\\users\\' + getpass.getuser()
+                                 + '\\AppData\\Roaming\\Nemetschek\\Vectorworks Cloud Services '
+                                 + build_label + '.ini')
 
-        if not self.config.read(SETTINGS_PATH):
-            with open(SETTINGS_PATH, 'w+') as configfile:
+        try:
+            self.config.read(self.path)
+            if not self.config:
+                raise EnvironmentError
+        except EnvironmentError:
+            with open(self.path, 'w+') as configfile:
                 self.config.write(configfile)
 
     def value(self, category, variable, default):
@@ -25,5 +32,5 @@ class WINSettingsParser:
         self.config[category][variable] = value
 
     def save(self):
-        with open(SETTINGS_PATH, 'w+') as configfile:
+        with open(self.path, 'w+') as configfile:
             self.config.write(configfile)

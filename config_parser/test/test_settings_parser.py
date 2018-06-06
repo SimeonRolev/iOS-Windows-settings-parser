@@ -2,8 +2,9 @@ import os
 from .. import settings_parser, settings
 
 
-SETTINGS_PATH = './settings.plist'
-s = settings_parser.SettingsParser('iOS')
+s = settings_parser.SettingsParser()
+extension = '.ini' if s.os == 'Windows' else '.plist'
+s.parser.path = './test-config' + extension
 
 
 def scenario():
@@ -25,12 +26,12 @@ def scenario():
 
 def delete_config_file():
     try:
-        os.remove(SETTINGS_PATH)
+        os.remove(s.parser.path)
     except OSError:
         pass
 
 
-class TestIOSParser:
+class TestWINParser:
     def test_value_from_init(self):
         delete_config_file()
 
