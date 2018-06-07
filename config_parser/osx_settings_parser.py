@@ -25,6 +25,7 @@ class OSXSettingsParser:
             self.settings[category] = {}
 
         self.settings[category][variable] = value
+        self.save()
 
     def save(self):
         with open(self.path, 'wb') as fp:

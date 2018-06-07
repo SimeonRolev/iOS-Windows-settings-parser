@@ -11,14 +11,12 @@ def scenario():
     # Set two unexisting values
     s.setValue(settings.account_password, 'password')
     s.setValue(settings.account_username, 'username')
-    s.save()
 
     assert s.value(settings.account_password, '30') == 'password'
     assert s.value(settings.account_username, '30') == 'username'
 
     # Override one of the values
     s.setValue(settings.account_password, 'new_password')
-    s.save()
 
     assert s.value(settings.account_password, '30') == 'new_password'
     assert s.value(settings.account_username,  '30') == 'username'

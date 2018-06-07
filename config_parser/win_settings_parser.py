@@ -30,6 +30,7 @@ class WINSettingsParser:
             self.config[category] = {}
 
         self.config[category][variable] = value
+        self.save()
 
     def save(self):
         with open(self.path, 'w+') as configfile:
