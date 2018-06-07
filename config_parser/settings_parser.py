@@ -16,6 +16,7 @@ class SettingsParser:
     def setValue(self, name, value):
         category, variable = name.split('/')
         self.parser.setValue(category, variable, value)
+        self.save()
 
     def save(self):
         self.parser.save()
